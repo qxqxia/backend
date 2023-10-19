@@ -11,12 +11,12 @@ export class AuthController {
         console.log({
             dto,
         });
-        return this.authServive.signup();
+        return this.authServive.signup(dto);
     }
     @Post('signin')
-    signin() {
+    signin(@Body() dto: AuthDto) {
         // return 'I am signed in';
-        return this.authServive.signin()
+        return this.authServive.signin(dto);
     }
 
 }
