@@ -4,7 +4,7 @@ import { ForbiddenException,
 import { PrismaService } from "../prisma/prisma.service";
 import { AuthDto } from "./dto";
 import * as argon from 'argon2';
-// import { User, Bookmark} from '@prisma/client';
+import { User, Bookmark} from '@prisma/client';
 
 @Injectable()
 export class AuthService {
