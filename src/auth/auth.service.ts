@@ -4,14 +4,40 @@ import { ForbiddenException,
 import { PrismaService } from "../prisma/prisma.service";
 import { AuthDto } from "./dto";
 import * as argon from 'argon2';
-import { User, Bookmark} from '@prisma/client';
+ "@prisma/client/runtime/library";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 @Injectable()
 export class AuthService {
     constructor(private prisma: PrismaService){}
-    signin(dto: AuthDto) {
-        return { msg: 'I have signed in'};
+    async signin(dto: AuthDto) {
+        // find the user by email
+        const user = await this.prisma.user.findUnique({
+            where: {
+                email: dto.email,
+            },
+        });
+        // if user does not exist throw exception
+        if (!user) {
+            throw new ForbiddenException(
+                'Credentials incorrect',
+            );
+        }
+        // compare password
+        const pwMathches = await argon.verify(
+            user.hash, 
+            dto.password
+            );
+        // if password incorrect throw exception
+        if (!pwMathches){
+            throw new ForbiddenException(
+                'Credentials incorrect',
+            );
+        }
+        //send back the user
+        delete user.hash;
+        return user;
+        //return { msg: 'I have signed in'};
     }
 
     async signup(dto: AuthDto) {
