@@ -29,7 +29,7 @@ export class AuthService {
             // },
         });
 
-        delete user.hash;
+        //delete user.hash;
         
         // return the saved user
         return user;
