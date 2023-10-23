@@ -29,5 +29,30 @@ describe('App e2e', () => {
   afterAll(() => {
     app.close();
   });
-  it.todo('should pass');
+  
+  describe('Auth', () => {
+    describe('Signup', () => {
+      it.todo('should signup')
+    });
+
+    describe('Signin', () => {});
+  });
+
+  describe('User', () => {
+    describe('Get me', () => {});
+
+    describe('Edit user', () => {});
+  });
+
+  describe('Bookmarks', () => {
+    describe('Create bookmark', () => {});
+
+    describe('Get bookmarks', () => {});
+
+    describe('Get bookmark by id', () => {});
+
+    describe('Edit bookmark', () => {});
+
+    describe('Delete bookmark', () => {});
+  });
 });
