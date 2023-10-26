@@ -16,7 +16,9 @@ model User {
   updatedAt DateTime @updatedAt
 
   email String @unique
+  username  String @unique
   hash String
+  avatar String
 
   firstName String?
   lastName String?
